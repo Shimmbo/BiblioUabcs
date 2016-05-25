@@ -3,6 +3,8 @@ package com.jimmy.uabcs.bibliouabcs.views;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.jimmy.uabcs.bibliouabcs.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override

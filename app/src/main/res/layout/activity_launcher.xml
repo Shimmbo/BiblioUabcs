@@ -9,5 +9,10 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jimmy.uabcs.bibliouabcs.Launcher">
-
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

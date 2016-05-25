@@ -11,7 +11,7 @@ import com.jimmy.uabcs.bibliouabcs.views.MainActivity;
 import static com.jimmy.uabcs.bibliouabcs.utils.Utils.*;
 
 public class Launcher extends AppCompatActivity {
-    private static final long SPLASH_DELAY = 20;
+    private static final long SPLASH_DELAY = 50;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +37,6 @@ public class Launcher extends AppCompatActivity {
     }
 
     private boolean checkSession (){
-        return true;
+        return false;
     }
 }
