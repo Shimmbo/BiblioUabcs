@@ -103,8 +103,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         boolean cancelLogin = false;
         View focusView = null;
 
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            passwordTextView.setError(getString(R.string.invalid_password));
+        if (TextUtils.isEmpty(password)) {
+            passwordTextView.setError(getString(R.string.field_required));
             focusView = passwordTextView;
             cancelLogin = true;
         }
@@ -131,18 +131,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private boolean isEmailValid(String email) {
-        //add your own logic
         return email.contains("@");
     }
 
-    private boolean isPasswordValid(String password) {
-        //add your own logic
-        return password.length() > 4;
-    }
-
-    /**
-     * Shows the progress UI and hides the login form.
-     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     public void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
@@ -231,9 +222,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Async Login Task to authenticate
-     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String emailStr;
