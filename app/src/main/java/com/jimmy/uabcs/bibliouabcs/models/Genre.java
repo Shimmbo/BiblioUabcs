@@ -1,10 +1,17 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Genre {
 
     //region Fields
+    @Expose
+    @SerializedName("id")
     public Long _id;
+    @Expose
     private String Name;
+    @Expose
     private int IdGenre;
     //endregion
 

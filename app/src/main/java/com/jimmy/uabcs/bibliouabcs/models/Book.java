@@ -1,21 +1,37 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Book {
 
     //region Fields
+    @Expose
+    @SerializedName("id")
     public Long _id;
+    @Expose
     private int IdBook;
+    @Expose
     private int IdPublisher;
+    @Expose
     private String Name;
+    @Expose
     private Date Year;
+    @Expose
     private int Pages;
+    @Expose
     private int Quantity;
+    @Expose
     private int Edition;
+    @Expose
     private String Place;
+    @Expose
     private String ISBN;
+    @Expose
     private String ISSN;
+    @Expose
     private String Path;
     //endregion
 

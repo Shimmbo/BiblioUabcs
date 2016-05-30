@@ -1,16 +1,27 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Borrow {
 
     //region Fields
+    @Expose
+    @SerializedName("id")
     public Long _id;
+    @Expose
     private int IdBorrow;
+    @Expose
     private Date Borrowed;
+    @Expose
     private Date Returned;
+    @Expose
     private int Prolongations;
+    @Expose
     private String IdUser;
+    @Expose
     private boolean State;
     //endregion
 

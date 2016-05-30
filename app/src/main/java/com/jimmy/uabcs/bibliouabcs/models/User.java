@@ -1,19 +1,34 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class User {
     //region Fields
+    @Expose
+    @SerializedName("id")
     public Long _id;
+    @Expose
     private String IdUser;
+    @Expose
     private String Name;
+    @Expose
     private String LastName_1;
+    @Expose
     private String LastName_2;
-    private String ControlNumber;
+    @Expose
+    private int ControlNumber;
+    @Expose
     private String Address;
+    @Expose
     private String Phone;
+    @Expose
     private boolean Registered;
+    @Expose
     private String Email;
+    @Expose
     private Date LastLogin;
     //endregion
 
@@ -50,11 +65,11 @@ public class User {
         LastName_2 = lastName_2;
     }
 
-    public String getControlNumber() {
+    public int getControlNumber() {
         return ControlNumber;
     }
 
-    public void setControlNumber(String controlNumber) {
+    public void setControlNumber(int controlNumber) {
         ControlNumber = controlNumber;
     }
 

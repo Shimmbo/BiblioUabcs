@@ -1,15 +1,25 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Booking {
 
     //region Fields
+    @Expose
+    @SerializedName("id")
     public Long _id;
+    @Expose
     private int IdBooking;
-    private Date mDate;
+    @Expose
+    private Date Date;
+    @Expose
     private byte State;
+    @Expose
     private String IdUser;
+    @Expose
     private int IdBook;
     //endregion
 
@@ -23,11 +33,11 @@ public class Booking {
     }
 
     public Date getDate() {
-        return mDate;
+        return Date;
     }
 
     public void setDate(Date date) {
-        mDate = date;
+        Date = date;
     }
 
     public byte getState() {
