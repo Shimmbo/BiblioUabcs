@@ -37,6 +37,6 @@ public class Launcher extends AppCompatActivity {
     }
 
     private boolean checkSession (){
-        return false;
+        return true;
     }
 }
