@@ -19,6 +19,14 @@
         </activity>
         <activity android:name=".views.LoginActivity">
         </activity>
+        <activity android:name=".views.RegisterActivity">
+        </activity>
+        <activity android:name=".views.ProfileActivity">
+        </activity>
+        <activity android:name=".views.AboutActivity">
+        </activity>
+        <activity android:name=".views.HelpActivity">
+        </activity>
     </application>
 
 </manifest>
