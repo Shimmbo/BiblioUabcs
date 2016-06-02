@@ -16,7 +16,9 @@ public class LoginResponse {
     @SerializedName("expires_in")
     private String expiresIn;
     @Expose
-    private String userName;
+    private String email;
+    @Expose
+    private String password;
     @Expose
     @SerializedName(".issued")
     private String issued;
@@ -51,12 +53,12 @@ public class LoginResponse {
         this.expiresIn = expiresIn;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getIssued() {
@@ -75,5 +77,12 @@ public class LoginResponse {
         this.expires = expires;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     //endregion
 }
