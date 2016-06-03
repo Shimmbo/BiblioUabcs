@@ -10,11 +10,11 @@ import com.jimmy.uabcs.bibliouabcs.views.LoginActivity;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.*;
 
 public class PrefsUtils {
-    SharedPreferences mPrefs;
+    private SharedPreferences mPrefs;
 
-    Editor mEditor;
+    private Editor mEditor;
 
-    Context mContext;
+    private Context mContext;
 
     public PrefsUtils(Context context){
         this.mContext = context;

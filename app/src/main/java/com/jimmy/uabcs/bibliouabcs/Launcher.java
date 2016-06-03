@@ -1,5 +1,6 @@
 package com.jimmy.uabcs.bibliouabcs;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class Launcher extends AppCompatActivity {
     }
 
     private void init(){
-        mPrefsUtils = new PrefsUtils(getApplicationContext());
+        mPrefsUtils = new PrefsUtils(this);
         if (mPrefsUtils.isUserLoggedIn()){
             gotoActivity(MainActivity.class);
         } else {

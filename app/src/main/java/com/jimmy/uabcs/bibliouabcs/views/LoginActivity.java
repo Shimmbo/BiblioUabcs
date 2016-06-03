@@ -28,6 +28,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
+import com.jimmy.uabcs.bibliouabcs.models.UserLogin;
+import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +39,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
-
-    private static final String DUMMY_CREDENTIALS = "user@test.com:hello";
 
     private UserLoginTask userLoginTask = null;
     @Bind(R.id.login_form) View loginFormView;
@@ -52,7 +52,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
+    }
 
+    private void init () {
+        ButterKnife.bind(this);
         passwordTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -61,14 +64,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     return true;
                 }
                 return false;
-            }
-        });
-
-        Button loginButton = (Button) findViewById(R.id.email_sign_in_button);
-        loginButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                initLogin();
             }
         });
 
@@ -85,8 +80,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         });
     }
 
-    private void init () {
-        ButterKnife.bind(this);
+    @OnClick(R.id.email_sign_in_button)
+    public void startLogin(){
+        initLogin();
     }
 
     public void initLogin() {
@@ -237,19 +233,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             //this is where you should write your authentication code
             // or call external service
             // following try-catch just simulates network access
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            //using a local dummy credentials store to authenticate
-            String[] pieces = DUMMY_CREDENTIALS.split(":");
-            if (pieces[0].equals(emailStr) && pieces[1].equals(passwordStr)) {
-                return true;
-            } else {
-                return false;
-            }
+            UserLogin login = new UserLogin();
+            login.setPassword(passwordStr);
+            login.setUsername(emailStr);
+            LibraryService.login(login);
+            return true;
         }
 
         @Override
