@@ -94,11 +94,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_byAuthor:
                 fragmentTransaction = true;
-                fragment = new AboutFragment();
+                fragment = new AuthorsFragment();
                 break;
             case R.id.nav_byPublisher:
                 fragmentTransaction = true;
-                fragment = new AboutFragment();
+                fragment = new PublisherFragment();
                 break;
             case R.id.nav_byTitle:
                 fragmentTransaction = true;
@@ -119,4 +119,6 @@ public class MainActivity extends AppCompatActivity
         lastClickedItem = item;
         return true;
     }
+
+
 }

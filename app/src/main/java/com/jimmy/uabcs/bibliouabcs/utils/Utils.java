@@ -91,6 +91,7 @@ public class Utils {
     public static void startFragment(FragmentManager frg, Fragment fragment){
         frg.beginTransaction()
             .replace(R.id.content_frame, fragment)
+            .addToBackStack(null)
             .commit();
     }
 }
