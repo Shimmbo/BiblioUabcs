@@ -56,8 +56,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s = formatter.format(mBook.getYear());
         viewHolder.name.setText(mBook.getName());
-        viewHolder.date.setText(s);
-        viewHolder.edition.setText(String.valueOf(mBook.getEdition()));
+        viewHolder.genres.setText(mBook.genreJoin());
+        viewHolder.authors.setText(mBook.authorJoin());
     }
 
     @Override
@@ -67,17 +67,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView name;
-        public TextView edition;
-        public TextView date;
+        public TextView genres;
+        public TextView authors;
 
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.bookName);
-            edition = (TextView) itemView.findViewById(R.id.edition);
-            date = (TextView) itemView.findViewById(R.id.year);
-            date.setOnClickListener(this);
+            genres = (TextView) itemView.findViewById(R.id.genres);
+            authors = (TextView) itemView.findViewById(R.id.authors);
+            genres.setOnClickListener(this);
             name.setOnClickListener(this);
-            edition.setOnClickListener(this);
+            authors.setOnClickListener(this);
 
         }
 

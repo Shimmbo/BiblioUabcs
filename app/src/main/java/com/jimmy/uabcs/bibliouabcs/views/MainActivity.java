@@ -16,6 +16,7 @@ import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.internal.Util;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
+        Utils.startFragment(getSupportFragmentManager(), new BooksFragment());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer,null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);

@@ -3,6 +3,8 @@ package com.jimmy.uabcs.bibliouabcs.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Author {
 
     //region Fields
@@ -13,6 +15,8 @@ public class Author {
     private int IdAuthor;
     @Expose
     private String Name;
+    @Expose
+    private List<Book> Book;
     //endregion
 
     //region Getters & Setters
@@ -31,6 +35,14 @@ public class Author {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public List<com.jimmy.uabcs.bibliouabcs.models.Book> getBook() {
+        return Book;
+    }
+
+    public void setBook(List<com.jimmy.uabcs.bibliouabcs.models.Book> book) {
+        Book = book;
     }
 
     @Override

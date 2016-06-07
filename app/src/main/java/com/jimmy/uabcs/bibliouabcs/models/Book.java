@@ -1,5 +1,7 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -34,6 +36,8 @@ public class Book {
     private String ISSN;
     @Expose
     private String Path;
+    @Expose
+    private String ImagePath;
     @Expose
     private List<Author> Author;
     @Expose
@@ -130,6 +134,14 @@ public class Book {
         Path = path;
     }
 
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
+    }
+
     public List<com.jimmy.uabcs.bibliouabcs.models.Author> getAuthor() {
         return Author;
     }
@@ -162,5 +174,23 @@ public class Book {
         return _id.hashCode();
     }
 
+    //endregion
+
+    //region Utils
+    public String genreJoin(){
+        String[] arrayNames = new String[Genre.size()];
+        for(int i = 0; i < Genre.size(); i++){
+            arrayNames[i] = Genre.get(i).getName();
+        }
+        return TextUtils.join(",", arrayNames);
+    }
+
+    public String authorJoin(){
+        String[] arrayNames = new String[Author.size()];
+        for(int i = 0; i < Author.size(); i++){
+            arrayNames[i] = Author.get(i).getName();
+        }
+        return TextUtils.join(",", arrayNames);
+    }
     //endregion
 }
