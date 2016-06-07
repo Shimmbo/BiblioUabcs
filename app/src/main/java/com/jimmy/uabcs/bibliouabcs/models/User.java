@@ -19,13 +19,17 @@ public class User {
     @Expose
     private String LastName_2;
     @Expose
-    private int ControlNumber;
+    private String ControlNumber;
+    @Expose
+    private String Password;
+    @Expose
+    private String ConfirmPassword;
     @Expose
     private String Address;
     @Expose
     private String Phone;
     @Expose
-    private boolean Registered;
+    private Date Registered;
     @Expose
     private String Email;
     @Expose
@@ -65,11 +69,11 @@ public class User {
         LastName_2 = lastName_2;
     }
 
-    public int getControlNumber() {
+    public String getControlNumber() {
         return ControlNumber;
     }
 
-    public void setControlNumber(int controlNumber) {
+    public void setControlNumber(String controlNumber) {
         ControlNumber = controlNumber;
     }
 
@@ -89,11 +93,11 @@ public class User {
         Phone = phone;
     }
 
-    public boolean isRegistered() {
+    public Date isRegistered() {
         return Registered;
     }
 
-    public void setRegistered(boolean registered) {
+    public void setRegistered(Date registered) {
         Registered = registered;
     }
 
@@ -111,6 +115,26 @@ public class User {
 
     public void setLastLogin(Date lastLogin) {
         LastLogin = lastLogin;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getConfirmPassword() {
+        return ConfirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        ConfirmPassword = confirmPassword;
+    }
+
+    public Date getRegistered() {
+        return Registered;
     }
 
     @Override

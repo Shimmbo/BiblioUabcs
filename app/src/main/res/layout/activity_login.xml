@@ -84,9 +84,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up"
-            android:id="@+id/signUpTextView"
+            android:text="@string/sign_up"
+            android:id="@+id/signUp"
             android:autoLink="web"
             android:textColor="#ffffffff" />
+
     </LinearLayout>
 </LinearLayout>

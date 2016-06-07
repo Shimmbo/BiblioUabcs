@@ -1,29 +1,82 @@
 package com.jimmy.uabcs.bibliouabcs.network;
 
-import android.util.Log;
-
-import com.jimmy.uabcs.bibliouabcs.App;
 import com.jimmy.uabcs.bibliouabcs.models.*;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.List;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+import static com.jimmy.uabcs.bibliouabcs.App.getApi;
 
 public class LibraryService {
-    private static final String TAG = "library";
+    public static void login(UserLogin mLogin, Subscriber<LoginResponse> subscriber) {
+         getApi().login(mLogin)
+                 .subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(subscriber);
+    }
 
-    public static void login(UserLogin loginModel){
-        Call<LoginResponse> call = App.getApi().login(loginModel);
-        call.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Log.i(TAG, response.message());
-            }
+    public static void register(User mUser, Subscriber<GeneralResponse> subscriber) {
+        getApi().register(mUser)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
 
-            @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
+    public static void getAuthor(int id, Subscriber<Author> subscriber){
+        getApi().getAuthor(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public static void getAuthors(Subscriber<List<Author>> subscriber){
+        getApi().getAuthors()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public static void getBook(int id, Subscriber<Book> subscriber){
+        getApi().getBook(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public static void getBooks(Subscriber<List<Book>> subscriber){
+        getApi().getBooks()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public static void getGenres(Subscriber<List<Genre>> subscriber){
+        getApi().getGenres()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public static void getPublisher(int id,Subscriber<Publisher> subscriber){
+        getApi().getPublisher(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public static void getPublishers(Subscriber<List<Publisher>> subscriber){
+        getApi().getPublishers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    public static void getUserInfo(String id,Subscriber<User> subscriber){
+        getApi().getUserInfo(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 }

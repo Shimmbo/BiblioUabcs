@@ -1,13 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.jimmy.uabcs.bibliouabcs.views.RegisterActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#3F51B5"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="10dp" >
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+        <ProgressBar android:id="@+id/register_progress" style="?android:attr/progressBarStyleLarge"
+                     android:layout_width="wrap_content" android:layout_height="wrap_content"
+                     android:visibility="gone" />
+        <ScrollView android:id="@+id/register_form" android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_name"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColorHint="#ffffffff"
+                    android:textColor="#ffffffff"
+                    android:inputType="textCapWords"/>
+
+                <EditText
+                    android:id="@+id/lastname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_lastname"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColorHint="#ffffffff"
+                    android:textColor="#ffffffff"
+                    android:inputType="textCapWords"/>
+
+                <EditText
+                    android:id="@+id/lastname2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_lastname2"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textColorHint="#ffffffff"
+                    android:textColor="#ffffffff"
+                    android:inputType="textCapWords"/>
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    android:padding="10dp"
+                    android:textColorHint="#ffffffff"
+                    android:textColor="#ffffffff"
+                    android:singleLine="true"/>
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_password"
+                    android:padding="10dp"
+                    android:textColorHint="#ffffffff"
+                    android:textColor="#ffffffff"
+                    android:singleLine="true"/>
+
+                <EditText
+                    android:id="@+id/confirmPassword"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPassword"
+                    android:hint="@string/hint_confirm_password"
+                    android:padding="10dp"
+                    android:textColorHint="#ffffffff"
+                    android:textColor="#ffffffff"
+                    android:singleLine="true"/>
+
+                <EditText
+                    android:id="@+id/controlNumber"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_control_number"
+                    android:padding="10dp"
+                    android:textColorHint="#ffffffff"
+                    android:textColor="#ffffffff"
+                    android:singleLine="true"/>
+
+                <!-- Login Button -->
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:textStyle="bold"
+                    android:textColor="#ffffffff"
+                    android:background="#303F9F"
+
+                    android:text="@string/btn_register"/>
+
+                <!-- Link to Login Screen -->
+
+                <Button
+                    android:id="@+id/btnLinkToLoginScreen"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dip"
+                    android:background="@null"
+                    android:text="@string/btn_link_to_login"
+                    android:textAllCaps="false"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

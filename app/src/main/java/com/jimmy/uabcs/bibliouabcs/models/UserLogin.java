@@ -1,14 +1,17 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
-import java.util.Date;
+import com.google.gson.annotations.Expose;
 
 public class UserLogin {
     //region Fields
+    @Expose
     private String username;
+    @Expose
     private String password;
-    private String grantType;
+    @Expose
+    private String grant_type;
     public UserLogin(){
-        grantType = "password";
+        grant_type = "password";
     }
     //endregion
 
@@ -30,8 +33,8 @@ public class UserLogin {
         this.password = password;
     }
 
-    public String getGrantType() {
-        return grantType;
+    public String getGrant_type() {
+        return grant_type;
     }
     //endregion
 }

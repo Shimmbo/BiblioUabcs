@@ -1,13 +1,11 @@
 package com.jimmy.uabcs.bibliouabcs;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.jimmy.uabcs.bibliouabcs.utils.PrefsUtils;
-import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 import com.jimmy.uabcs.bibliouabcs.views.LoginActivity;
 import com.jimmy.uabcs.bibliouabcs.views.MainActivity;
 

@@ -7,10 +7,35 @@
     <string name="invalid_password">Password is too short</string>
     <string name="incorrect_password">Password is incorrect</string>
     <string name="field_required">This field is required</string>
+    <string name="action_settings">Settings</string>
+    <string name="error_login">Problems to login</string>
+    <string name="version">Version</string>
+    <string name="copyright">2016-2018 Bibliouabcs inc</string>
+    <string name="copyright_extra">All rights reserved</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_link_to_login">Alredy registred! Login Me.</string>
+    <string name="hint_lastname">Lastname</string>
+    <string name="hint_lastname2">Second lastname</string>
+    <string name="hint_control_number">Contorl number</string>
+    <string name="error_register">Problems when registering</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register_success">Registered</string>
     <string name="title_activity_base">BaseActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bookGroup">Find by</string>
+    <string name="by_title">Title</string>
+    <string name="by_author">Author</string>
+    <string name="by_publisher">Publisher</string>
+    <string name="info">Information</string>
+    <string name="about">About</string>
+    <string name="error_books">Error while retrieving books</string>
 </resources>

@@ -42,6 +42,6 @@ public class PrefsUtils {
     }
 
     public boolean isUserLoggedIn(){
-        return mPrefs.getBoolean(IS_USER_LOGIN, false);
+        return mPrefs.getBoolean(IS_USER_LOGIN, true);
     }
 }

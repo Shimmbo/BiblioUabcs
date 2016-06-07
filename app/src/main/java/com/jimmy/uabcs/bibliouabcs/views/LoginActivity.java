@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
@@ -26,10 +27,15 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jimmy.uabcs.bibliouabcs.R;
+import com.jimmy.uabcs.bibliouabcs.models.LoginResponse;
 import com.jimmy.uabcs.bibliouabcs.models.UserLogin;
+import com.jimmy.uabcs.bibliouabcs.network.CustomSubscriber;
 import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
+import com.jimmy.uabcs.bibliouabcs.utils.PrefsUtils;
+import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,16 +43,24 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscriber;
+
+import static com.jimmy.uabcs.bibliouabcs.utils.Utils.showProgress;
+import static com.jimmy.uabcs.bibliouabcs.utils.Utils.startActivityHome;
 
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
-    private UserLoginTask userLoginTask = null;
-    @Bind(R.id.login_form) View loginFormView;
-    @Bind(R.id.login_progress) View progressView;
-    @Bind(R.id.email) AutoCompleteTextView emailTextView;
-    @Bind(R.id.password) EditText passwordTextView;
-    @Bind(R.id.signUpTextView) TextView signUpTextView;
-
+    private PrefsUtils mPrefsUtils;
+    @Bind(R.id.login_form)
+    View loginFormView;
+    @Bind(R.id.login_progress)
+    View progressView;
+    @Bind(R.id.email)
+    AutoCompleteTextView emailTextView;
+    @Bind(R.id.password)
+    EditText passwordTextView;
+    @Bind(R.id.signUp)
+    TextView signUpTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +70,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private void init () {
         ButterKnife.bind(this);
+        mPrefsUtils = new PrefsUtils(this);
         passwordTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -74,8 +89,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             @Override
             public void onClick(View v) {
                 Log.i("LoginActivity", "Sign Up Activity activated.");
-                // this is where you should start the signup Activity
-                // LoginActivity.this.startActivity(new Intent(LoginActivity.this, SignupActivity.class));
+                Utils.startActivity(LoginActivity.this, RegisterActivity.class);
             }
         });
     }
@@ -86,10 +100,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     public void initLogin() {
-        if (userLoginTask != null) {
-            return;
-        }
-
+        final int shortTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
         emailTextView.setError(null);
         passwordTextView.setError(null);
 
@@ -120,47 +131,41 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             focusView.requestFocus();
         } else {
             // show progress spinner, and start background task to login
-            showProgress(true);
-            userLoginTask = new UserLoginTask(email, password);
-            userLoginTask.execute((Void) null);
+            showProgress(true, loginFormView,shortTime, progressView);
+
+            UserLogin login = new UserLogin();
+            login.setPassword(password);
+            login.setUsername(email);
+            LibraryService.login(login, new CustomSubscriber<LoginResponse>(){
+                @Override
+                public void onError(Throwable e) {
+                    super.onError(e);
+                    showProgress(false, loginFormView,shortTime, progressView);
+                    Toast toast = Toast.makeText(getApplicationContext(),R.string.error_login,
+                            Toast.LENGTH_SHORT );
+                    toast.show();
+                }
+                @Override
+                public void onNext(LoginResponse mLoginResponse){
+                    super.onNext(mLoginResponse);
+
+                    showProgress(false, loginFormView,shortTime, progressView);
+
+                    if (mLoginResponse != null) {
+                        mPrefsUtils.saveUserSession(mLoginResponse);
+                        startActivityHome(LoginActivity.this, MainActivity.class);
+                    } else {
+                        // login failure
+                        passwordTextView.setError(getString(R.string.incorrect_password));
+                        passwordTextView.requestFocus();
+                    }
+                }
+            });
         }
     }
 
     private boolean isEmailValid(String email) {
         return email.contains("@");
-    }
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    public void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            loginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            progressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            progressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    progressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            progressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
     }
 
 
@@ -216,49 +221,5 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
-    }
-
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
-        private final String emailStr;
-        private final String passwordStr;
-
-        UserLoginTask(String email, String password) {
-            emailStr = email;
-            passwordStr = password;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            //this is where you should write your authentication code
-            // or call external service
-            // following try-catch just simulates network access
-            UserLogin login = new UserLogin();
-            login.setPassword(passwordStr);
-            login.setUsername(emailStr);
-            LibraryService.login(login);
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            userLoginTask = null;
-            //stop the progress spinner
-            showProgress(false);
-
-            if (success) {
-                //  login success and move to main Activity here.
-            } else {
-                // login failure
-                passwordTextView.setError(getString(R.string.incorrect_password));
-                passwordTextView.requestFocus();
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            userLoginTask = null;
-            showProgress(false);
-        }
     }
 }

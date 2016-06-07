@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
+import java.util.List;
 
 public class Book {
 
@@ -33,6 +34,10 @@ public class Book {
     private String ISSN;
     @Expose
     private String Path;
+    @Expose
+    private List<Author> Author;
+    @Expose
+    private List<Genre> Genre;
     //endregion
 
     //region Getters & Setters
@@ -123,6 +128,22 @@ public class Book {
 
     public void setPath(String path) {
         Path = path;
+    }
+
+    public List<com.jimmy.uabcs.bibliouabcs.models.Author> getAuthor() {
+        return Author;
+    }
+
+    public void setAuthor(List<com.jimmy.uabcs.bibliouabcs.models.Author> author) {
+        Author = author;
+    }
+
+    public List<com.jimmy.uabcs.bibliouabcs.models.Genre> getGenre() {
+        return Genre;
+    }
+
+    public void setGenre(List<com.jimmy.uabcs.bibliouabcs.models.Genre> genre) {
+        Genre = genre;
     }
 
     @Override

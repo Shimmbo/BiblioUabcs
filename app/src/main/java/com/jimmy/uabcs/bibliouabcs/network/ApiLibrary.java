@@ -4,47 +4,50 @@ import com.jimmy.uabcs.bibliouabcs.models.*;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import rx.Observable;
 
 public interface ApiLibrary {
 
-    @POST("/login")
-    Call<LoginResponse> login(@Body UserLogin login);
+    @POST("login")
+    Observable<LoginResponse> login(@Body UserLogin login);
+
+    @POST("account/register")
+    Observable<GeneralResponse> register(@Body User mUser);
 
     @GET("authors/author/{id}")
-    Call<Author> getAuthor(@Path("id") int id);
+    Observable<Author> getAuthor(@Path("id") int id);
 
     @GET("authors/authors")
-    Call<List<Author>> getAuthors();
+    Observable<List<Author>> getAuthors();
 
     @GET("books/book/{id}")
-    Call<Book> getBook(@Path("id") int id);
+    Observable<Book> getBook(@Path("id") int id);
 
     @GET("books/books")
-    Call<List<Book>> getBooks();
+    Observable<List<Book>> getBooks();
 
     @GET("books/genres")
-    Call<List<Genre>> getGenres();
+    Observable<List<Genre>> getGenres();
 
     @GET("publishers/publisher/{id}")
-    Call<Publisher> getPublisher(@Path("id") int id);
+    Observable<Publisher> getPublisher(@Path("id") int id);
 
     @GET("publishers/publishers")
-    Call<List<Publisher>> getPublishers();
+    Observable<List<Publisher>> getPublishers();
 
     @GET("users/userInfo/{id}")
-    Call<User> getUserInfo(@Path("id") String id);
+    Observable<User> getUserInfo(@Path("id") String id);
 
     @GET("users/users")
-    Call<List<User>> getUsers();
+    Observable<List<User>> getUsers();
 
     @GET("users/userDetails/{id}")
-    Call<User> getUserDetails(@Path("id") String id);
+    Observable<User> getUserDetails(@Path("id") String id);
 
     @GET("users/borrows/{id}")
-    Call<Borrow> getBorrow(@Path("id") int id);
+    Observable<Borrow> getBorrow(@Path("id") int id);
 }
