@@ -11,7 +11,7 @@ import static com.jimmy.uabcs.bibliouabcs.App.getApi;
 
 public class LibraryService {
     public static void login(UserLogin mLogin, Subscriber<LoginResponse> subscriber) {
-         getApi().login(mLogin)
+         getApi().login(mLogin.getUsername(), mLogin.getPassword(), mLogin.getGrant_type())
                  .subscribeOn(Schedulers.io())
                  .observeOn(AndroidSchedulers.mainThread())
                  .subscribe(subscriber);

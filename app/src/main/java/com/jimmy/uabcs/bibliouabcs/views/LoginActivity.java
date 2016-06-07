@@ -136,6 +136,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             UserLogin login = new UserLogin();
             login.setPassword(password);
             login.setUsername(email);
+            login.setGrant_type("password");
             LibraryService.login(login, new CustomSubscriber<LoginResponse>(){
                 @Override
                 public void onError(Throwable e) {
