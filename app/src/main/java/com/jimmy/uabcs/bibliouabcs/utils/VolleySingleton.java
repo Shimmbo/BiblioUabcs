@@ -7,14 +7,15 @@ import android.support.v4.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.jimmy.uabcs.bibliouabcs.App;
 
 public class VolleySingleton{
     private static VolleySingleton mInstance = null;
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
-    private VolleySingleton(Context mContext){
-        mRequestQueue = Volley.newRequestQueue(mContext);
+    private VolleySingleton(){
+        mRequestQueue = Volley.newRequestQueue(App.getContext());
         mImageLoader = new ImageLoader(this.mRequestQueue, new ImageLoader.ImageCache() {
             private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
             public void putBitmap(String url, Bitmap bitmap) {
@@ -26,9 +27,9 @@ public class VolleySingleton{
         });
     }
 
-    public static VolleySingleton getInstance(Context mContext){
+    public static VolleySingleton getInstance(){
         if(mInstance == null){
-            mInstance = new VolleySingleton(mContext);
+            mInstance = new VolleySingleton();
         }
         return mInstance;
     }

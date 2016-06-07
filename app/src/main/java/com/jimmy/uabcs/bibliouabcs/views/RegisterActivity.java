@@ -29,7 +29,6 @@ import static com.jimmy.uabcs.bibliouabcs.utils.Utils.startActivityHome;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private PrefsUtils mPrefsUtils;
     @Bind(R.id.name)
     EditText name;
     @Bind(R.id.lastname)
@@ -57,7 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void init () {
         ButterKnife.bind(this);
-        mPrefsUtils = new PrefsUtils(this);
     }
 
     @OnClick(R.id.btnLinkToLoginScreen)

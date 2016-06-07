@@ -23,7 +23,7 @@ public class Launcher extends AppCompatActivity {
     }
 
     private void init(){
-        mPrefsUtils = new PrefsUtils(this);
+        mPrefsUtils = new PrefsUtils();
         if (mPrefsUtils.isUserLoggedIn()){
             gotoActivity(MainActivity.class);
         } else {

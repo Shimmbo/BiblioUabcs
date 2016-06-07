@@ -10,9 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
+import com.jimmy.uabcs.bibliouabcs.models.LoginResponse;
+import com.jimmy.uabcs.bibliouabcs.utils.PrefsUtils;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
+
+import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,16 +32,28 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     @Bind(R.id.nav_view)
     NavigationView navigationView;
-
+    @Bind(R.id.username)
+    TextView userName;
+    @Bind(R.id.useremail)
+    TextView userEmail;
+    private PrefsUtils mPrefs;
     private MenuItem lastClickedItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+    }
+
+    public void init(){
+        mPrefs = new PrefsUtils();
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        LoginResponse response = mPrefs.getUserDetails();
+        userName.setText(response.getEmail());
+        userEmail.setText(response.getPassword());
         Utils.startFragment(getSupportFragmentManager(), new BooksFragment());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer,null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -45,8 +62,6 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setNavigationItemSelectedListener(this);
     }
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -57,7 +57,7 @@ public class BookFragment extends Fragment {
         title.setText(mBook.getName());
         String imaegPath = mBook.getImagePath();
         NetworkImageView img = (NetworkImageView) rootView.findViewById(R.id.thumbnail);
-        ImageLoader mImageLoader = VolleySingleton.getInstance(getContext()).getImageLoader();
+        ImageLoader mImageLoader = VolleySingleton.getInstance().getImageLoader();
         if(imaegPath == null || imaegPath == "")
             img.setImageUrl(URL + DEFAULT_IMAGE, mImageLoader);
         else

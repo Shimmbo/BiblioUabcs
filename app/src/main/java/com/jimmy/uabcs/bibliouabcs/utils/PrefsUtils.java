@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.jimmy.uabcs.bibliouabcs.App;
 import com.jimmy.uabcs.bibliouabcs.models.LoginResponse;
 import com.jimmy.uabcs.bibliouabcs.views.LoginActivity;
 
@@ -14,11 +15,9 @@ public class PrefsUtils {
 
     private Editor mEditor;
 
-    private Context mContext;
 
-    public PrefsUtils(Context context){
-        this.mContext = context;
-        mPrefs = mContext.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
+    public PrefsUtils(){
+        mPrefs = App.getContext().getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
         mEditor = mPrefs.edit();
     }
 
@@ -31,17 +30,16 @@ public class PrefsUtils {
 
     public LoginResponse getUserDetails(){
         String json = mPrefs.getString(KEY_USER, null);
-        LoginResponse user = GSON.fromJson(json, LoginResponse.class);
-        return user;
+        return GSON.fromJson(json, LoginResponse.class);
     }
 
     public void logoutUser(){
         mEditor.clear();
         mEditor.commit();
-        Utils.startActivity(mContext, LoginActivity.class);
+        Utils.startActivity(App.getContext(), LoginActivity.class);
     }
 
     public boolean isUserLoggedIn(){
-        return mPrefs.getBoolean(IS_USER_LOGIN, true);
+        return mPrefs.getBoolean(IS_USER_LOGIN, false);
     }
 }

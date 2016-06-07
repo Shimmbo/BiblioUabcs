@@ -70,7 +70,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private void init () {
         ButterKnife.bind(this);
-        mPrefsUtils = new PrefsUtils(this);
+        mPrefsUtils = new PrefsUtils();
         passwordTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
