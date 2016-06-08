@@ -38,7 +38,7 @@ public class AuthorsFragment extends Fragment {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                Utils.showToast(getActivity(), getString(R.string.error_books));
+                Utils.showToast(getActivity(), getString(R.string.error_authors));
             }
 
             @Override
