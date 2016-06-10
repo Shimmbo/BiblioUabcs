@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.adapter.AuthorAdapter;
@@ -27,6 +28,7 @@ public class PublisherFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private PublisherAdapter mAdapter;
     private LinearLayoutManager layoutManager;
+    private TextView emptyView;
     public PublisherFragment(){}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class PublisherFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.publisherList);
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
+        emptyView = (TextView) rootView.findViewById(R.id.empty_view);
         mAdapter = new PublisherAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
         LibraryService.getPublishers(new CustomSubscriber<List<Publisher>>() {
@@ -47,8 +50,13 @@ public class PublisherFragment extends Fragment {
             @Override
             public void onNext(List<Publisher> publishers) {
                 super.onNext(publishers);
-                for(Publisher publisher:publishers)
-                    mAdapter.addData(publisher);
+                if (publishers.size() == 0){
+                    mRecyclerView.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
+                }
+                else
+                    for(Publisher publisher:publishers)
+                        mAdapter.addData(publisher);
             }
         });
         return rootView;

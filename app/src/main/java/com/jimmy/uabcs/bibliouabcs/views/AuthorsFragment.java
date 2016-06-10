@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.adapter.AuthorAdapter;
@@ -24,6 +25,7 @@ public class AuthorsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private AuthorAdapter mAdapter;
     private LinearLayoutManager layoutManager;
+    private TextView emptyView;
     public AuthorsFragment(){}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class AuthorsFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new AuthorAdapter(getContext());
+        emptyView = (TextView) rootView.findViewById(R.id.empty_view);
         mRecyclerView.setAdapter(mAdapter);
         LibraryService.getAuthors(new CustomSubscriber<List<Author>>() {
 
@@ -44,7 +47,12 @@ public class AuthorsFragment extends Fragment {
             @Override
             public void onNext(List<Author> authors) {
                 super.onNext(authors);
-                for(Author author:authors)
+                if (authors.size() == 0){
+                    mRecyclerView.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
+                }
+                else
+                    for(Author author:authors)
                     mAdapter.addData(author);
             }
         });

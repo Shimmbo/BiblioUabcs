@@ -8,10 +8,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.adapter.BookAdapter;
+import com.jimmy.uabcs.bibliouabcs.database.LibraryDBHelper;
 import com.jimmy.uabcs.bibliouabcs.models.Book;
 import com.jimmy.uabcs.bibliouabcs.network.CustomSubscriber;
 import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
@@ -27,6 +29,7 @@ public class BooksFragment extends Fragment {
     private List<Book> booksParam;
     private RecyclerView mRecyclerView;
     private BookAdapter mAdapter;
+    private TextView emptyView;
     private LinearLayoutManager layoutManager;
     public BooksFragment(){}
 
@@ -52,6 +55,7 @@ public class BooksFragment extends Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.bookList);
         layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
+        emptyView = (TextView) rootView.findViewById(R.id.empty_view);
         mAdapter = new BookAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
         if (booksParam == null)
@@ -66,13 +70,25 @@ public class BooksFragment extends Fragment {
                 @Override
                 public void onNext(List<Book> books) {
                     super.onNext(books);
-                    for(Book book:books)
-                        mAdapter.addData(book);
+                    if (books.size() == 0){
+                        mRecyclerView.setVisibility(View.GONE);
+                        emptyView.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        for(Book book:books)
+                            mAdapter.addData(book);
+                    }
+
                 }
             });
         else {
-            for(Book book:booksParam)
-                mAdapter.addData(book);
+            if(booksParam.size() == 0){
+                mRecyclerView.setVisibility(View.GONE);
+                emptyView.setVisibility(View.VISIBLE);
+            } else{
+                for(Book book:booksParam)
+                    mAdapter.addData(book);
+            }
         }
         return rootView;
     }
