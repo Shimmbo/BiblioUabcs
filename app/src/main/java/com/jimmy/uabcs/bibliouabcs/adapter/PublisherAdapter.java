@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.models.Author;
+import com.jimmy.uabcs.bibliouabcs.models.Book;
 import com.jimmy.uabcs.bibliouabcs.models.Publisher;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 import com.jimmy.uabcs.bibliouabcs.views.BooksFragment;
@@ -21,24 +22,47 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.jimmy.uabcs.bibliouabcs.utils.Constants.EMPTY_STRING;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
 
 public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.ViewHolder> {
     private List<Publisher> mItems;
     private Context context;
+    private  List<Publisher> itemsCopy;
+
     public PublisherAdapter(Context context) {
         super();
         mItems = new ArrayList<Publisher>();
+        itemsCopy = new ArrayList<Publisher>();
         this.context = context;
     }
 
     public void addData(Publisher mPublisher) {
         mItems.add(mPublisher);
+        itemsCopy.add(mPublisher);
         notifyDataSetChanged();
     }
 
     public void clear() {
         mItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void filter(String text) {
+        if(text.isEmpty()){
+            mItems.clear();
+            mItems.addAll(itemsCopy);
+        } else{
+            ArrayList<Publisher> result = new ArrayList<>();
+            text = text.toLowerCase();
+            for(Publisher item: itemsCopy){
+                if(item.getName().toLowerCase().contains(text)){
+                    result.add(item);
+                }
+            }
+            mItems.clear();
+            mItems.addAll(result);
+        }
         notifyDataSetChanged();
     }
 
@@ -55,6 +79,7 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
         Publisher mPublisher = mItems.get(i);
 
         viewHolder.name.setText(mPublisher.getName());
+        viewHolder.counts.setText(mPublisher.getBook().size() + EMPTY_STRING);
     }
 
     @Override
@@ -64,11 +89,14 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView name;
-
+        public TextView counts;
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.publisherName);
             name.setOnClickListener(this);
+
+            counts = (TextView) itemView.findViewById(R.id.publisherBooksCount);
+            counts.setOnClickListener(this);
 
         }
 

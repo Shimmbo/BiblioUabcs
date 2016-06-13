@@ -41,4 +41,5 @@
     <string name="error_authors">Error while retrieving authors</string>
     <string name="error_publishers">Errror retrieving publishers</string>
     <string name="no_data_available">No data available</string>
+    <string name="action_search">Search...</string>
 </resources>

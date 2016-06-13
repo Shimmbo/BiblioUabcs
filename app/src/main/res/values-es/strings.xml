@@ -12,7 +12,7 @@
     <string name="copyright_extra">Todos los derechos reservados</string>
     <string name="error_authors">Error al intentar traer autores</string>
     <string name="error_books">Error al intentar traer libros</string>
-    <string name="error_login">User/Password Incorrecto. Intente de nuevo</string>
+    <string name="error_login">Usuario/Contraseña Incorrectos. Intente de nuevo</string>
     <string name="error_publishers">Error al intentar traer editoriales</string>
     <string name="error_register">Problemas al intentar registrarse</string>
     <string name="field_required">El campo es requerido</string>
@@ -36,4 +36,5 @@
     <string name="version">Versión</string>
     <string name="hello_blank_fragment"></string>
     <string name="no_data_available">No hay información disponible</string>
+    <string name="action_search">Buscar...</string>
 </resources>

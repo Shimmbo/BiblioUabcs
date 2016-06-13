@@ -3,9 +3,14 @@ package com.jimmy.uabcs.bibliouabcs.views;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -20,11 +25,12 @@ import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
 
-public class BooksFragment extends Fragment {
+public class BooksFragment extends Fragment{
     private static final String BOOKS_PARAM = "books";
     private List<Book> booksParam;
     private RecyclerView mRecyclerView;
@@ -48,6 +54,7 @@ public class BooksFragment extends Fragment {
             Type listType = new TypeToken<List<Book>>(){}.getType();
             booksParam = (List<Book>)GSON.fromJson(getArguments().getString(BOOKS_PARAM), listType);
         }
+        setHasOptionsMenu(true);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,8 +82,9 @@ public class BooksFragment extends Fragment {
                         emptyView.setVisibility(View.VISIBLE);
                     }
                     else{
-                        for(Book book:books)
+                        for(Book book:books){
                             mAdapter.addData(book);
+                        }
                     }
 
                 }
@@ -96,4 +104,24 @@ public class BooksFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        inflater.inflate(R.menu.base, menu);
+        final MenuItem item = menu.findItem(R.id.action_search);
+        final SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(item);
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mAdapter.filter(newText);
+                return true;
+            }
+        });
+    }
+
 }

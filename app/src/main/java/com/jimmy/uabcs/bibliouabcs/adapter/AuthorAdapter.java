@@ -27,25 +27,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.DEFAULT_IMAGE;
+import static com.jimmy.uabcs.bibliouabcs.utils.Constants.EMPTY_STRING;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.URL;
 
 public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.ViewHolder> {
     private List<Author> mItems;
+    private List<Author> itemsCopy;
     private Context context;
     public AuthorAdapter(Context context) {
         super();
         mItems = new ArrayList<Author>();
+        itemsCopy = new ArrayList<Author>();
         this.context = context;
     }
 
     public void addData(Author mAuthor) {
         mItems.add(mAuthor);
+        itemsCopy.add(mAuthor);
         notifyDataSetChanged();
     }
 
     public void clear() {
         mItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void filter(String text) {
+        if(text.isEmpty()){
+            mItems.clear();
+            mItems.addAll(itemsCopy);
+        } else{
+            ArrayList<Author> result = new ArrayList<>();
+            text = text.toLowerCase();
+            for(Author item: itemsCopy){
+                if(item.getName().toLowerCase().contains(text)){
+                    result.add(item);
+                }
+            }
+            mItems.clear();
+            mItems.addAll(result);
+        }
         notifyDataSetChanged();
     }
 
@@ -62,6 +84,7 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.ViewHolder
         Author mAuthor = mItems.get(i);
 
         viewHolder.name.setText(mAuthor.getName());
+        viewHolder.counts.setText(mAuthor.getBook().size() + EMPTY_STRING);
     }
 
     @Override
@@ -71,11 +94,13 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.ViewHolder
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView name;
-
+        public TextView counts;
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.authorName);
+            counts = (TextView) itemView.findViewById(R.id.booksCount);
             name.setOnClickListener(this);
+            counts.setOnClickListener(this);
 
         }
 

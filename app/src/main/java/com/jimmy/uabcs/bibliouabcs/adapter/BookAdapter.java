@@ -30,20 +30,41 @@ import static com.jimmy.uabcs.bibliouabcs.utils.Constants.*;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private List<Book> mItems;
+    private List<Book> itemsCopy;
     private Context context;
     public BookAdapter(Context context) {
         super();
         mItems = new ArrayList<Book>();
+        itemsCopy = new ArrayList<Book>();
         this.context = context;
     }
 
     public void addData(Book mBook) {
         mItems.add(mBook);
+        itemsCopy.add(mBook);
         notifyDataSetChanged();
     }
 
     public void clear() {
         mItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void filter(String text) {
+        if(text.isEmpty()){
+            mItems.clear();
+            mItems.addAll(itemsCopy);
+        } else{
+            ArrayList<Book> result = new ArrayList<>();
+            text = text.toLowerCase();
+            for(Book item: itemsCopy){
+                if(item.getName().toLowerCase().contains(text)){
+                    result.add(item);
+                }
+            }
+            mItems.clear();
+            mItems.addAll(result);
+        }
         notifyDataSetChanged();
     }
 
