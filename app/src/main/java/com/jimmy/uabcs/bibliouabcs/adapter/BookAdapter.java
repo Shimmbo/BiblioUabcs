@@ -85,10 +85,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         viewHolder.genres.setText(mBook.genreJoin());
         viewHolder.authors.setText(mBook.authorJoin());
         ImageLoader mImageLoader = VolleySingleton.getInstance().getImageLoader();
+        viewHolder.mImageView.setDefaultImageResId(R.drawable.no_book_image);
         String imagePath = mBook.getImagePath();
-        if (imagePath == null || imagePath == "")
-            viewHolder.mImageView.setImageUrl(URL + DEFAULT_IMAGE,mImageLoader);
-        else
+        if (imagePath != null && imagePath != "")
             viewHolder.mImageView.setImageUrl(URL + imagePath,mImageLoader);
     }
 

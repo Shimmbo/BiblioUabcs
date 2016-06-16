@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.jimmy.uabcs.bibliouabcs.App;
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.models.Author;
 import com.jimmy.uabcs.bibliouabcs.models.Book;
@@ -84,7 +85,13 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.ViewHolder
         Author mAuthor = mItems.get(i);
 
         viewHolder.name.setText(mAuthor.getName());
-        viewHolder.counts.setText(mAuthor.getBook().size() + EMPTY_STRING);
+        String message = App.getContext().getString(R.string.books,mAuthor.getBook().size());
+        viewHolder.counts.setText(message);
+        ImageLoader mImageLoader = VolleySingleton.getInstance().getImageLoader();
+        viewHolder.mImageView.setDefaultImageResId(R.drawable.no_author_image);
+        String imagePath = mAuthor.getImagePath();
+        if (imagePath != null && imagePath != "")
+            viewHolder.mImageView.setImageUrl(URL + imagePath,mImageLoader);
     }
 
     @Override
@@ -95,13 +102,15 @@ public class AuthorAdapter extends RecyclerView.Adapter<AuthorAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView name;
         public TextView counts;
+        public NetworkImageView mImageView;
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.authorName);
             counts = (TextView) itemView.findViewById(R.id.booksCount);
+            mImageView = (NetworkImageView) itemView.findViewById(R.id.author_photo);
             name.setOnClickListener(this);
             counts.setOnClickListener(this);
-
+            mImageView.setOnClickListener(this);
         }
 
         @Override

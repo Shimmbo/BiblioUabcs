@@ -17,6 +17,8 @@ public class Author {
     private String Name;
     @Expose
     private List<Book> Book;
+    @Expose
+    private String ImagePath;
     //endregion
 
     //region Getters & Setters
@@ -43,6 +45,14 @@ public class Author {
 
     public void setBook(List<com.jimmy.uabcs.bibliouabcs.models.Book> book) {
         Book = book;
+    }
+
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
     }
 
     @Override

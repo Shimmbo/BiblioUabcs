@@ -33,8 +33,12 @@
     <string name="register_success">Registrado!</string>
     <string name="sign_up">Registrarse</string>
     <string name="title_activity_base"></string>
-    <string name="version">Versión</string>
+    <string name="version">Versión 1.0.0</string>
     <string name="hello_blank_fragment"></string>
     <string name="no_data_available">No hay información disponible</string>
     <string name="action_search">Buscar...</string>
+    <string name="books">Total de libros: %1$d</string>
+    <string name="anonymous">Anónimo</string>
+    <string name="genres">Sin géneros</string>
+    <string name="publisher">Editorial desconocida</string>
 </resources>

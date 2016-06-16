@@ -126,8 +126,7 @@
                     android:layout_marginTop="40dip"
                     android:background="@null"
                     android:text="@string/btn_link_to_login"
-                    android:textAllCaps="false"
-                    android:textSize="15dp" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

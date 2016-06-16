@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.jimmy.uabcs.bibliouabcs.App;
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.models.Author;
 import com.jimmy.uabcs.bibliouabcs.models.Book;
@@ -77,9 +78,9 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Publisher mPublisher = mItems.get(i);
-
         viewHolder.name.setText(mPublisher.getName());
-        viewHolder.counts.setText(mPublisher.getBook().size() + EMPTY_STRING);
+        String message = App.getContext().getString(R.string.books,mPublisher.getBook().size());
+        viewHolder.counts.setText(message);
     }
 
     @Override

@@ -64,13 +64,19 @@ public class BookFragment extends Fragment {
             img.setImageUrl(URL + imaegPath,mImageLoader);
 
         TextView authors = (TextView) rootView.findViewById(R.id.authors);
-        authors.setText(mBook.authorJoin());
+        if(mBook.getAuthor().size() > 0)
+            authors.setText(mBook.authorJoin());
 
         TextView isbn = (TextView) rootView.findViewById(R.id.isbn);
-        isbn.setText(mBook.getISBN());
+        isbn.setText(getString(R.string.isbn,mBook.getISBN()));
 
         TextView genres = (TextView) rootView.findViewById(R.id.genre);
-        genres.setText(mBook.genreJoin());
+        if(mBook.getGenre().size() > 0)
+            genres.setText(mBook.genreJoin());
+
+        TextView publisher = (TextView) rootView.findViewById(R.id.publisher);
+        if (mBook.getPublisher() != null)
+            publisher.setText(mBook.getPublisher().getName());
         return  rootView;
     }
 }

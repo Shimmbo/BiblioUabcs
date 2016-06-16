@@ -42,6 +42,8 @@ public class Book {
     private List<Author> Author;
     @Expose
     private List<Genre> Genre;
+    @Expose
+    private Publisher Publisher;
     //endregion
 
     //region Getters & Setters
@@ -156,6 +158,14 @@ public class Book {
 
     public void setGenre(List<com.jimmy.uabcs.bibliouabcs.models.Genre> genre) {
         Genre = genre;
+    }
+
+    public com.jimmy.uabcs.bibliouabcs.models.Publisher getPublisher() {
+        return Publisher;
+    }
+
+    public void setPublisher(com.jimmy.uabcs.bibliouabcs.models.Publisher publisher) {
+        Publisher = publisher;
     }
 
     @Override

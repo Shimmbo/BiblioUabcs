@@ -19,10 +19,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:text="@string/app_name"
-            android:id="@+id/textView2"
-            android:textSize="30dp"
+            android:id="@+id/app_name"
             android:textColor="#ffffffff" />
 
 
