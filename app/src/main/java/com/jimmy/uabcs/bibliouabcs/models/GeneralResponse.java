@@ -1,9 +1,6 @@
 package com.jimmy.uabcs.bibliouabcs.models;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.Date;
 
 public class GeneralResponse {
     //region Fields

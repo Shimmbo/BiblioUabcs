@@ -16,9 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
-import com.jimmy.uabcs.bibliouabcs.adapter.AuthorAdapter;
 import com.jimmy.uabcs.bibliouabcs.adapter.PublisherAdapter;
-import com.jimmy.uabcs.bibliouabcs.models.Author;
 import com.jimmy.uabcs.bibliouabcs.models.Publisher;
 import com.jimmy.uabcs.bibliouabcs.network.CustomSubscriber;
 import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
@@ -34,13 +32,16 @@ public class PublisherFragment extends Fragment {
     private PublisherAdapter mAdapter;
     private LinearLayoutManager layoutManager;
     private TextView emptyView;
-    public PublisherFragment(){}
+
+    public PublisherFragment() {
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_publisher, container, false);
@@ -61,17 +62,17 @@ public class PublisherFragment extends Fragment {
             @Override
             public void onNext(List<Publisher> publishers) {
                 super.onNext(publishers);
-                if (publishers.size() == 0){
+                if (publishers.size() == 0) {
                     mRecyclerView.setVisibility(View.GONE);
                     emptyView.setVisibility(View.VISIBLE);
-                }
-                else
-                    for(Publisher publisher:publishers)
+                } else
+                    for (Publisher publisher : publishers)
                         mAdapter.addData(publisher);
             }
         });
         return rootView;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

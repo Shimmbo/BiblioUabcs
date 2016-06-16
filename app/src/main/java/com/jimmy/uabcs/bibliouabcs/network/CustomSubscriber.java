@@ -3,8 +3,10 @@ package com.jimmy.uabcs.bibliouabcs.network;
 import android.util.Log;
 
 import rx.Subscriber;
+
 public class CustomSubscriber<T> extends Subscriber<T> {
     private static final String TAG = "library";
+
     @Override
     public void onStart() {
         super.onStart();

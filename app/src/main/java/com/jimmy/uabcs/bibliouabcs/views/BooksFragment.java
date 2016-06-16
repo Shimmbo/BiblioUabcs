@@ -18,26 +18,26 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.adapter.BookAdapter;
-import com.jimmy.uabcs.bibliouabcs.database.LibraryDBHelper;
 import com.jimmy.uabcs.bibliouabcs.models.Book;
 import com.jimmy.uabcs.bibliouabcs.network.CustomSubscriber;
 import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
 
-public class BooksFragment extends Fragment{
+public class BooksFragment extends Fragment {
     private static final String BOOKS_PARAM = "books";
     private List<Book> booksParam;
     private RecyclerView mRecyclerView;
     private BookAdapter mAdapter;
     private TextView emptyView;
     private LinearLayoutManager layoutManager;
-    public BooksFragment(){}
+
+    public BooksFragment() {
+    }
 
     public static BooksFragment newInstance(String param1) {
         BooksFragment fragment = new BooksFragment();
@@ -51,11 +51,13 @@ public class BooksFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            Type listType = new TypeToken<List<Book>>(){}.getType();
-            booksParam = (List<Book>)GSON.fromJson(getArguments().getString(BOOKS_PARAM), listType);
+            Type listType = new TypeToken<List<Book>>() {
+            }.getType();
+            booksParam = (List<Book>) GSON.fromJson(getArguments().getString(BOOKS_PARAM), listType);
         }
         setHasOptionsMenu(true);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_books, container, false);
@@ -77,12 +79,11 @@ public class BooksFragment extends Fragment{
                 @Override
                 public void onNext(List<Book> books) {
                     super.onNext(books);
-                    if (books.size() == 0){
+                    if (books.size() == 0) {
                         mRecyclerView.setVisibility(View.GONE);
                         emptyView.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        for(Book book:books){
+                    } else {
+                        for (Book book : books) {
                             mAdapter.addData(book);
                         }
                     }
@@ -90,23 +91,24 @@ public class BooksFragment extends Fragment{
                 }
             });
         else {
-            if(booksParam.size() == 0){
+            if (booksParam.size() == 0) {
                 mRecyclerView.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
-            } else{
-                for(Book book:booksParam)
+            } else {
+                for (Book book : booksParam)
                     mAdapter.addData(book);
             }
         }
         return rootView;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.base, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(item);

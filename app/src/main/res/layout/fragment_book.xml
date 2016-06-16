@@ -30,12 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/separator1"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_def"
             android:lines="1"
             android:maxLines="1"
             android:paddingBottom="@dimen/padding_def"
             android:singleLine="true"
-            android:layout_centerHorizontal="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
@@ -43,9 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
+            android:layout_centerHorizontal="true"
             android:paddingBottom="@dimen/padding_def"
             android:text="@string/genres"
-            android:layout_centerHorizontal="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -53,9 +53,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/genre"
+            android:layout_centerHorizontal="true"
             android:paddingBottom="@dimen/padding_def"
             android:text="@string/anonymous"
-            android:layout_centerHorizontal="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -63,9 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/authors"
+            android:layout_centerHorizontal="true"
             android:paddingBottom="@dimen/padding_def"
             android:text="@string/publisher"
-            android:layout_centerHorizontal="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -73,9 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/publisher"
-            android:paddingBottom="@dimen/padding_def"
             android:layout_centerHorizontal="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+            android:paddingBottom="@dimen/padding_def"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
     </RelativeLayout>
 </ScrollView>

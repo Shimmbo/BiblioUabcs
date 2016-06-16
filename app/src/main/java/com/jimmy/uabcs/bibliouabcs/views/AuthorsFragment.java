@@ -17,9 +17,7 @@ import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.adapter.AuthorAdapter;
-import com.jimmy.uabcs.bibliouabcs.adapter.BookAdapter;
 import com.jimmy.uabcs.bibliouabcs.models.Author;
-import com.jimmy.uabcs.bibliouabcs.models.Book;
 import com.jimmy.uabcs.bibliouabcs.network.CustomSubscriber;
 import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
@@ -31,7 +29,9 @@ public class AuthorsFragment extends Fragment {
     private AuthorAdapter mAdapter;
     private LinearLayoutManager layoutManager;
     private TextView emptyView;
-    public AuthorsFragment(){}
+
+    public AuthorsFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,24 +59,24 @@ public class AuthorsFragment extends Fragment {
             @Override
             public void onNext(List<Author> authors) {
                 super.onNext(authors);
-                if (authors.size() == 0){
+                if (authors.size() == 0) {
                     mRecyclerView.setVisibility(View.GONE);
                     emptyView.setVisibility(View.VISIBLE);
-                }
-                else
-                    for(Author author:authors)
-                    mAdapter.addData(author);
+                } else
+                    for (Author author : authors)
+                        mAdapter.addData(author);
             }
         });
         return rootView;
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.base, menu);
         final MenuItem item = menu.findItem(R.id.action_search);
         final SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(item);

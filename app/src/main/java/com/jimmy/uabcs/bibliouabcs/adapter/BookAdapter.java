@@ -1,6 +1,5 @@
 package com.jimmy.uabcs.bibliouabcs.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,23 +14,23 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.models.Book;
-import com.jimmy.uabcs.bibliouabcs.utils.Constants;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 import com.jimmy.uabcs.bibliouabcs.utils.VolleySingleton;
 import com.jimmy.uabcs.bibliouabcs.views.BookFragment;
-import com.jimmy.uabcs.bibliouabcs.views.BooksFragment;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jimmy.uabcs.bibliouabcs.utils.Constants.*;
+import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
+import static com.jimmy.uabcs.bibliouabcs.utils.Constants.URL;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     private List<Book> mItems;
     private List<Book> itemsCopy;
     private Context context;
+
     public BookAdapter(Context context) {
         super();
         mItems = new ArrayList<Book>();
@@ -51,14 +50,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     }
 
     public void filter(String text) {
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             mItems.clear();
             mItems.addAll(itemsCopy);
-        } else{
+        } else {
             ArrayList<Book> result = new ArrayList<>();
             text = text.toLowerCase();
-            for(Book item: itemsCopy){
-                if(item.getName().toLowerCase().contains(text)){
+            for (Book item : itemsCopy) {
+                if (item.getName().toLowerCase().contains(text)) {
                     result.add(item);
                 }
             }
@@ -82,13 +81,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s = formatter.format(mBook.getYear());
         viewHolder.name.setText(mBook.getName());
-        viewHolder.genres.setText(mBook.genreJoin());
-        viewHolder.authors.setText(mBook.authorJoin());
+        if (mBook.getGenre().size() > 0)
+            viewHolder.genres.setText(mBook.genreJoin());
+
+        if (mBook.getAuthor().size() > 0)
+            viewHolder.authors.setText(mBook.authorJoin());
         ImageLoader mImageLoader = VolleySingleton.getInstance().getImageLoader();
         viewHolder.mImageView.setDefaultImageResId(R.drawable.no_book_image);
         String imagePath = mBook.getImagePath();
         if (imagePath != null && imagePath != "")
-            viewHolder.mImageView.setImageUrl(URL + imagePath,mImageLoader);
+            viewHolder.mImageView.setImageUrl(URL + imagePath, mImageLoader);
     }
 
     @Override
@@ -96,7 +98,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         return mItems.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name;
         public TextView genres;
         public TextView authors;
@@ -121,7 +123,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             String jsonBook = GSON.toJson(mItems.get(pos));
             Fragment bookFragment = BookFragment.newInstance(jsonBook);
             FragmentManager manager = ((FragmentActivity) context).getSupportFragmentManager();
-            Utils.startFragment(manager,bookFragment);
+            Utils.startFragment(manager, bookFragment);
         }
     }
 }

@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -18,11 +17,8 @@ import com.jimmy.uabcs.bibliouabcs.models.LoginResponse;
 import com.jimmy.uabcs.bibliouabcs.utils.PrefsUtils;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 
-import org.w3c.dom.Text;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import okhttp3.internal.Util;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,6 +31,7 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     private PrefsUtils mPrefs;
     private MenuItem lastClickedItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +45,15 @@ public class MainActivity extends AppCompatActivity
 
         Utils.startFragment(getSupportFragmentManager(), new BooksFragment());
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer,null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.getHeaderView(0);
-        TextView userName = (TextView)headerLayout.findViewById(R.id.username);
-        TextView userEmail = (TextView)headerLayout.findViewById(R.id.useremail);;
+        TextView userName = (TextView) headerLayout.findViewById(R.id.username);
+        TextView userEmail = (TextView) headerLayout.findViewById(R.id.useremail);
+        ;
         userName.setText(response.getEmail());
         userEmail.setText(response.getPassword());
     }
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         int id = item.getItemId();
 
-        switch(id){
+        switch (id) {
             case R.id.nav_about:
                 fragmentTransaction = true;
                 fragment = new AboutFragment();
@@ -113,9 +111,9 @@ public class MainActivity extends AppCompatActivity
                 break;
         }
 
-        if(fragmentTransaction) {
+        if (fragmentTransaction) {
             Utils.startFragment(getSupportFragmentManager(), fragment);
-            if(lastClickedItem != null)
+            if (lastClickedItem != null)
                 lastClickedItem.setChecked(false);
             item.setChecked(true);
             getSupportActionBar().setTitle(item.getTitle());

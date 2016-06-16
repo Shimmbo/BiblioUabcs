@@ -11,30 +11,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.jimmy.uabcs.bibliouabcs.R;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
 public class Utils {
-    public static void startActivity(Context context, Class clazz){
+    public static void startActivity(Context context, Class clazz) {
         Intent mIntent = new Intent(context, clazz);
         Bundle options = new Bundle();
-        ActivityCompat.startActivity((Activity)context, mIntent, options);
+        ActivityCompat.startActivity((Activity) context, mIntent, options);
     }
 
-    public static void startActivityHome(Context context, Class clazz){
+    public static void startActivityHome(Context context, Class clazz) {
         Activity activity = (Activity) context;
         Intent mIntent = new Intent(context, clazz);
         mIntent.addCategory(Intent.CATEGORY_HOME);
@@ -44,8 +34,8 @@ public class Utils {
         ActivityCompat.startActivity(activity, mIntent, options);
     }
 
-    public static void enableHomeAsUp(ActionBar toolbar){
-        if (toolbar != null){
+    public static void enableHomeAsUp(ActionBar toolbar) {
+        if (toolbar != null) {
             toolbar.setDisplayHomeAsUpEnabled(true);
         }
     }
@@ -82,16 +72,16 @@ public class Utils {
         }
     }
 
-    public static void showToast(Context context, String text){
+    public static void showToast(Context context, String text) {
         Toast toast = Toast.makeText(context, text,
-                Toast.LENGTH_SHORT );
+                Toast.LENGTH_SHORT);
         toast.show();
     }
 
-    public static void startFragment(FragmentManager frg, Fragment fragment){
+    public static void startFragment(FragmentManager frg, Fragment fragment) {
         frg.beginTransaction()
-            .replace(R.id.content_frame, fragment)
-            .addToBackStack(null)
-            .commit();
+                .replace(R.id.content_frame, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

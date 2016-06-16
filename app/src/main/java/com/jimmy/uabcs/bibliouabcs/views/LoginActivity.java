@@ -1,18 +1,12 @@
 package com.jimmy.uabcs.bibliouabcs.views;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Paint;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -24,7 +18,6 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +36,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Subscriber;
 
 import static com.jimmy.uabcs.bibliouabcs.utils.Utils.showProgress;
 import static com.jimmy.uabcs.bibliouabcs.utils.Utils.startActivityHome;
@@ -61,6 +53,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     EditText passwordTextView;
     @Bind(R.id.signUp)
     TextView signUpTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +61,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         init();
     }
 
-    private void init () {
+    private void init() {
         ButterKnife.bind(this);
         mPrefsUtils = new PrefsUtils();
         passwordTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -95,7 +88,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     @OnClick(R.id.email_sign_in_button)
-    public void startLogin(){
+    public void startLogin() {
         initLogin();
     }
 
@@ -131,26 +124,27 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             focusView.requestFocus();
         } else {
             // show progress spinner, and start background task to login
-            showProgress(true, loginFormView,shortTime, progressView);
+            showProgress(true, loginFormView, shortTime, progressView);
 
             UserLogin login = new UserLogin();
             login.setPassword(password);
             login.setUsername(email);
             login.setGrant_type("password");
-            LibraryService.login(login, new CustomSubscriber<LoginResponse>(){
+            LibraryService.login(login, new CustomSubscriber<LoginResponse>() {
                 @Override
                 public void onError(Throwable e) {
                     super.onError(e);
-                    showProgress(false, loginFormView,shortTime, progressView);
-                    Toast toast = Toast.makeText(getApplicationContext(),R.string.error_login,
-                            Toast.LENGTH_SHORT );
+                    showProgress(false, loginFormView, shortTime, progressView);
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.error_login,
+                            Toast.LENGTH_SHORT);
                     toast.show();
                 }
+
                 @Override
-                public void onNext(LoginResponse mLoginResponse){
+                public void onNext(LoginResponse mLoginResponse) {
                     super.onNext(mLoginResponse);
 
-                    showProgress(false, loginFormView,shortTime, progressView);
+                    showProgress(false, loginFormView, shortTime, progressView);
 
                     if (mLoginResponse != null) {
                         mPrefsUtils.saveUserSession(mLoginResponse);

@@ -12,24 +12,19 @@ import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.App;
 import com.jimmy.uabcs.bibliouabcs.R;
-import com.jimmy.uabcs.bibliouabcs.models.Author;
-import com.jimmy.uabcs.bibliouabcs.models.Book;
 import com.jimmy.uabcs.bibliouabcs.models.Publisher;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 import com.jimmy.uabcs.bibliouabcs.views.BooksFragment;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jimmy.uabcs.bibliouabcs.utils.Constants.EMPTY_STRING;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
 
 public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.ViewHolder> {
     private List<Publisher> mItems;
     private Context context;
-    private  List<Publisher> itemsCopy;
+    private List<Publisher> itemsCopy;
 
     public PublisherAdapter(Context context) {
         super();
@@ -50,14 +45,14 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
     }
 
     public void filter(String text) {
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             mItems.clear();
             mItems.addAll(itemsCopy);
-        } else{
+        } else {
             ArrayList<Publisher> result = new ArrayList<>();
             text = text.toLowerCase();
-            for(Publisher item: itemsCopy){
-                if(item.getName().toLowerCase().contains(text)){
+            for (Publisher item : itemsCopy) {
+                if (item.getName().toLowerCase().contains(text)) {
                     result.add(item);
                 }
             }
@@ -79,7 +74,7 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Publisher mPublisher = mItems.get(i);
         viewHolder.name.setText(mPublisher.getName());
-        String message = App.getContext().getString(R.string.books,mPublisher.getBook().size());
+        String message = App.getContext().getString(R.string.books, mPublisher.getBook().size());
         viewHolder.counts.setText(message);
     }
 
@@ -88,9 +83,10 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
         return mItems.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name;
         public TextView counts;
+
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.publisherName);
@@ -107,7 +103,7 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
             String jsonBooks = GSON.toJson(mItems.get(pos).getBook());
             Fragment booksFragment = BooksFragment.newInstance(jsonBooks);
             FragmentManager manager = ((FragmentActivity) context).getSupportFragmentManager();
-            Utils.startFragment(manager,booksFragment);
+            Utils.startFragment(manager, booksFragment);
         }
     }
 }

@@ -1,6 +1,13 @@
 package com.jimmy.uabcs.bibliouabcs.network;
 
-import com.jimmy.uabcs.bibliouabcs.models.*;
+import com.jimmy.uabcs.bibliouabcs.models.Author;
+import com.jimmy.uabcs.bibliouabcs.models.Book;
+import com.jimmy.uabcs.bibliouabcs.models.Borrow;
+import com.jimmy.uabcs.bibliouabcs.models.GeneralResponse;
+import com.jimmy.uabcs.bibliouabcs.models.Genre;
+import com.jimmy.uabcs.bibliouabcs.models.LoginResponse;
+import com.jimmy.uabcs.bibliouabcs.models.Publisher;
+import com.jimmy.uabcs.bibliouabcs.models.User;
 
 import java.util.List;
 
@@ -8,7 +15,6 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import rx.Observable;

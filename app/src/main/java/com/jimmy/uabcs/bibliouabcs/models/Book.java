@@ -187,17 +187,17 @@ public class Book {
     //endregion
 
     //region Utils
-    public String genreJoin(){
+    public String genreJoin() {
         String[] arrayNames = new String[Genre.size()];
-        for(int i = 0; i < Genre.size(); i++){
+        for (int i = 0; i < Genre.size(); i++) {
             arrayNames[i] = Genre.get(i).getName();
         }
         return TextUtils.join(",", arrayNames);
     }
 
-    public String authorJoin(){
+    public String authorJoin() {
         String[] arrayNames = new String[Author.size()];
-        for(int i = 0; i < Author.size(); i++){
+        for (int i = 0; i < Author.size(); i++) {
             arrayNames[i] = Author.get(i).getName();
         }
         return TextUtils.join(",", arrayNames);

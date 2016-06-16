@@ -1,30 +1,22 @@
 package com.jimmy.uabcs.bibliouabcs.views;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.models.GeneralResponse;
-import com.jimmy.uabcs.bibliouabcs.models.LoginResponse;
 import com.jimmy.uabcs.bibliouabcs.models.User;
-import com.jimmy.uabcs.bibliouabcs.models.UserLogin;
 import com.jimmy.uabcs.bibliouabcs.network.CustomSubscriber;
 import com.jimmy.uabcs.bibliouabcs.network.LibraryService;
-import com.jimmy.uabcs.bibliouabcs.utils.PrefsUtils;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
-
-import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.jimmy.uabcs.bibliouabcs.utils.Utils.showProgress;
-import static com.jimmy.uabcs.bibliouabcs.utils.Utils.startActivity;
 import static com.jimmy.uabcs.bibliouabcs.utils.Utils.startActivityHome;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -47,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     View registerForm;
     @Bind(R.id.register_progress)
     View registerProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +47,15 @@ public class RegisterActivity extends AppCompatActivity {
         init();
     }
 
-    private void init () {
+    private void init() {
         ButterKnife.bind(this);
     }
 
     @OnClick(R.id.btnLinkToLoginScreen)
-    public void backToLogin(){
+    public void backToLogin() {
         Utils.startActivity(RegisterActivity.this, LoginActivity.class);
     }
+
     @OnClick(R.id.btn_register)
     public void register() {
         final int shortTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
@@ -85,20 +79,21 @@ public class RegisterActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             // show progress spinner, and start background task to login
-            showProgress(true,registerForm,shortTime, registerProgress);
+            showProgress(true, registerForm, shortTime, registerProgress);
 
-            LibraryService.register(mUser, new CustomSubscriber<GeneralResponse>(){
+            LibraryService.register(mUser, new CustomSubscriber<GeneralResponse>() {
                 @Override
                 public void onError(Throwable e) {
                     super.onError(e);
-                    showProgress(false,registerForm,shortTime, registerProgress);
+                    showProgress(false, registerForm, shortTime, registerProgress);
                     Utils.showToast(getApplicationContext(), getString(R.string.error_register));
                 }
+
                 @Override
-                public void onNext(GeneralResponse mGeneralResponse){
+                public void onNext(GeneralResponse mGeneralResponse) {
                     super.onNext(mGeneralResponse);
-                    showProgress(false,registerForm,shortTime, registerProgress);
-                    if(mGeneralResponse.isSuccess()){
+                    showProgress(false, registerForm, shortTime, registerProgress);
+                    if (mGeneralResponse.isSuccess()) {
                         Utils.showToast(getApplicationContext(), getString(R.string.register_success));
                         startActivityHome(RegisterActivity.this, LoginActivity.class);
                     } else {

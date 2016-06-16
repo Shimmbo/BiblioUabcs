@@ -1,20 +1,21 @@
 package com.jimmy.uabcs.bibliouabcs;
 
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.jimmy.uabcs.bibliouabcs.utils.PrefsUtils;
 import com.jimmy.uabcs.bibliouabcs.views.LoginActivity;
 import com.jimmy.uabcs.bibliouabcs.views.MainActivity;
 
-import static com.jimmy.uabcs.bibliouabcs.utils.Utils.*;
+import static com.jimmy.uabcs.bibliouabcs.utils.Utils.startActivityHome;
 
 public class Launcher extends AppCompatActivity {
     private static final long SPLASH_DELAY = 100;
     PrefsUtils mPrefsUtils;
     private SharedPreferences mSharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,9 +23,9 @@ public class Launcher extends AppCompatActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         mPrefsUtils = new PrefsUtils();
-        if (mPrefsUtils.isUserLoggedIn()){
+        if (mPrefsUtils.isUserLoggedIn()) {
             gotoActivity(MainActivity.class);
         } else {
             gotoActivity(LoginActivity.class);
