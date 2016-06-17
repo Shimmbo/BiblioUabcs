@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.jimmy.uabcs.bibliouabcs.utils.Constants.DEFAULT_IMAGE;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.URL;
 
@@ -88,12 +89,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         if (mBook.getAuthor().size() > 0)
             viewHolder.authors.setText(mBook.authorJoin());
         ImageLoader mImageLoader = VolleySingleton.getInstance().getImageLoader();
+        viewHolder.mImageView.setDefaultImageResId(R.drawable.no_book_image);
 
         String imagePath = mBook.getImagePath();
         if (imagePath != null && imagePath != "")
             viewHolder.mImageView.setImageUrl(URL + imagePath, mImageLoader);
         else
-            viewHolder.mImageView.setDefaultImageResId(R.drawable.no_book_image);
+            viewHolder.mImageView.setImageUrl(URL + DEFAULT_IMAGE, mImageLoader);
     }
 
     @Override
