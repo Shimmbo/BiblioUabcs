@@ -77,6 +77,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
+
         Book mBook = mItems.get(i);
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s = formatter.format(mBook.getYear());
@@ -87,10 +88,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         if (mBook.getAuthor().size() > 0)
             viewHolder.authors.setText(mBook.authorJoin());
         ImageLoader mImageLoader = VolleySingleton.getInstance().getImageLoader();
-        viewHolder.mImageView.setDefaultImageResId(R.drawable.no_book_image);
+
         String imagePath = mBook.getImagePath();
         if (imagePath != null && imagePath != "")
             viewHolder.mImageView.setImageUrl(URL + imagePath, mImageLoader);
+        else
+            viewHolder.mImageView.setDefaultImageResId(R.drawable.no_book_image);
     }
 
     @Override
