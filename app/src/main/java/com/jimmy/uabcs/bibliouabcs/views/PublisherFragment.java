@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.adapter.PublisherAdapter;
+import com.jimmy.uabcs.bibliouabcs.database.LibraryDBHelper;
 import com.jimmy.uabcs.bibliouabcs.models.Publisher;
 import com.jimmy.uabcs.bibliouabcs.network.CustomSubscriber;
 import com.jimmy.uabcs.bibliouabcs.network.LibraryService;

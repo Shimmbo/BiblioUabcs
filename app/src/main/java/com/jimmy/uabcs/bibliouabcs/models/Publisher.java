@@ -16,7 +16,8 @@ public class Publisher {
     private int IdPublisher;
     @Expose
     private List<Book> Book;
-
+    @Expose
+    private String ImagePath;
     //endregion
 
     //region Getters & Setters
@@ -44,6 +45,14 @@ public class Publisher {
 
     public void setBook(List<com.jimmy.uabcs.bibliouabcs.models.Book> book) {
         Book = book;
+    }
+
+    public String getImagePath() {
+        return ImagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        ImagePath = imagePath;
     }
 
     @Override

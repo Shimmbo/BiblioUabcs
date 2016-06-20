@@ -5,7 +5,6 @@ import android.content.SharedPreferences.Editor;
 
 import com.jimmy.uabcs.bibliouabcs.App;
 import com.jimmy.uabcs.bibliouabcs.models.LoginResponse;
-import com.jimmy.uabcs.bibliouabcs.views.LoginActivity;
 
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.IS_USER_LOGIN;
@@ -39,7 +38,6 @@ public class PrefsUtils {
     public void logoutUser() {
         mEditor.clear();
         mEditor.commit();
-        Utils.startActivity(App.getContext(), LoginActivity.class);
     }
 
     public boolean isUserLoggedIn() {

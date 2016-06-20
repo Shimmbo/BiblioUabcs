@@ -12,6 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/publisher_photo"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_margin="4dp" />
 
         <TextView
             android:id="@+id/publisherName"
@@ -19,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="@dimen/margin_def"
+            android:layout_toRightOf="@+id/publisher_photo"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
@@ -27,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/publisherName"
             android:layout_marginLeft="@dimen/margin_def"
+            android:layout_toRightOf="@id/publisher_photo"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 

@@ -10,16 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.jimmy.uabcs.bibliouabcs.App;
 import com.jimmy.uabcs.bibliouabcs.R;
 import com.jimmy.uabcs.bibliouabcs.models.Publisher;
 import com.jimmy.uabcs.bibliouabcs.utils.Utils;
+import com.jimmy.uabcs.bibliouabcs.utils.VolleySingleton;
 import com.jimmy.uabcs.bibliouabcs.views.BooksFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.jimmy.uabcs.bibliouabcs.utils.Constants.GSON;
+import static com.jimmy.uabcs.bibliouabcs.utils.Constants.URL;
 
 public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.ViewHolder> {
     private List<Publisher> mItems;
@@ -76,6 +80,12 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
         viewHolder.name.setText(mPublisher.getName());
         String message = App.getContext().getString(R.string.books, mPublisher.getBook().size());
         viewHolder.counts.setText(message);
+
+        ImageLoader mImageLoader = VolleySingleton.getInstance().getImageLoader();
+        viewHolder.mImageView.setDefaultImageResId(R.drawable.no_publisher_image);
+        String imagePath = mPublisher.getImagePath();
+        if (imagePath != null && imagePath != "")
+            viewHolder.mImageView.setImageUrl(URL + imagePath, mImageLoader);
     }
 
     @Override
@@ -86,6 +96,7 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView name;
         public TextView counts;
+        public NetworkImageView mImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -95,6 +106,8 @@ public class PublisherAdapter extends RecyclerView.Adapter<PublisherAdapter.View
             counts = (TextView) itemView.findViewById(R.id.publisherBooksCount);
             counts.setOnClickListener(this);
 
+            mImageView = (NetworkImageView) itemView.findViewById(R.id.publisher_photo);
+            mImageView.setOnClickListener(this);
         }
 
         @Override

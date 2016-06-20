@@ -20,6 +20,8 @@ import com.jimmy.uabcs.bibliouabcs.utils.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static com.jimmy.uabcs.bibliouabcs.utils.Utils.startActivityHome;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -108,6 +110,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_byTitle:
                 fragmentTransaction = true;
                 fragment = new BooksFragment();
+                break;
+            case R.id.nav_logout:
+                startActivityHome(this, LoginActivity.class);
+                PrefsUtils mPrefsUtils = new PrefsUtils();
+                mPrefsUtils.logoutUser();
                 break;
         }
 
